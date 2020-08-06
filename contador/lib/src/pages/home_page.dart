@@ -14,6 +14,7 @@ class HomePage extends StatelessWidget {
               Text('Número de taps:', style: estiloTexto),
               Text('0', style: estiloTexto)
             ])),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         floatingActionButton: FloatingActionButton(
             child: Icon(Icons.add),
             // Si lo pasas a null es como si estuviera deshabilitado
