@@ -22,16 +22,17 @@ class _ContadorPageState extends State<ContadorPage> {
               Text('$_cont', style: _estiloTexto)
             ])),
         // floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-        floatingActionButton: FloatingActionButton(
-            child: Icon(Icons.add),
-            // Si lo pasas a null es como si estuviera deshabilitado
-            onPressed: () {
-              // print('Hola Mundo!');
-
-              // Redibujar componente
-              setState(() {
-                _cont++;
-              });
-            }));
+        floatingActionButton: _crearBotones());
   }
+}
+
+Widget _crearBotones() {
+  return Row(mainAxisAlignment: MainAxisAlignment.end, children: <Widget>[
+    SizedBox(width: 30),
+    FloatingActionButton(onPressed: null, child: Icon(Icons.exposure_zero)),
+    Expanded(child: SizedBox()),
+    FloatingActionButton(onPressed: null, child: Icon(Icons.remove)),
+    SizedBox(width: 5),
+    FloatingActionButton(onPressed: null, child: Icon(Icons.add))
+  ]);
 }
