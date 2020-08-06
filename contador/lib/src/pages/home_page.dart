@@ -13,6 +13,12 @@ class HomePage extends StatelessWidget {
                 children: <Widget>[
               Text('Número de taps:', style: estiloTexto),
               Text('0', style: estiloTexto)
-            ])));
+            ])),
+        floatingActionButton: FloatingActionButton(
+            child: Icon(Icons.add),
+            // Si lo pasas a null es como si estuviera deshabilitado
+            onPressed: () {
+              print('Hola Mundo!');
+            }));
   }
 }
