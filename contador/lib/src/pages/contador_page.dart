@@ -24,15 +24,27 @@ class _ContadorPageState extends State<ContadorPage> {
         // floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         floatingActionButton: _crearBotones());
   }
-}
 
-Widget _crearBotones() {
-  return Row(mainAxisAlignment: MainAxisAlignment.end, children: <Widget>[
-    SizedBox(width: 30),
-    FloatingActionButton(onPressed: null, child: Icon(Icons.exposure_zero)),
-    Expanded(child: SizedBox()),
-    FloatingActionButton(onPressed: null, child: Icon(Icons.remove)),
-    SizedBox(width: 5),
-    FloatingActionButton(onPressed: null, child: Icon(Icons.add))
-  ]);
+  Widget _crearBotones() {
+    return Row(mainAxisAlignment: MainAxisAlignment.end, children: <Widget>[
+      SizedBox(width: 30),
+      FloatingActionButton(onPressed: _reset, child: Icon(Icons.exposure_zero)),
+      Expanded(child: SizedBox()),
+      FloatingActionButton(onPressed: _sustraer, child: Icon(Icons.remove)),
+      SizedBox(width: 5),
+      FloatingActionButton(onPressed: _agregar, child: Icon(Icons.add))
+    ]);
+  }
+
+  void _agregar() {
+    setState(() => _cont++);
+  }
+
+  void _sustraer() {
+    setState(() => _cont--);
+  }
+
+  void _reset() {
+    setState(() => _cont = 0);
+  }
 }
