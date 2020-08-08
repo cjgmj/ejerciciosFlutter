@@ -45,9 +45,13 @@ class HomePage extends StatelessWidget {
           leading: getIcon(opt['icon']),
           trailing: Icon(Icons.keyboard_arrow_right, color: Colors.blue),
           onTap: () {
-            final route = MaterialPageRoute(builder: (context) => AlertPage());
+            // Navegación
+            // final route = MaterialPageRoute(builder: (context) => AlertPage());
 
-            Navigator.push(context, route);
+            // Navigator.push(context, route);
+
+            // Navegación por nombre
+            Navigator.pushNamed(context, opt['ruta']);
           });
 
       opciones..add(widgetTemp)..add(Divider());
