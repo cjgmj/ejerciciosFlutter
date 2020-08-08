@@ -7,12 +7,42 @@ class CardPage extends StatelessWidget {
       appBar: AppBar(title: Text('Cards Page')),
       body: ListView(padding: EdgeInsets.all(10),
           // padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-          children: <Widget>[_cardTipo1(), SizedBox(height: 30), _cardTipo2()]),
+          children: <Widget>[
+            _cardTipo1(),
+            SizedBox(height: 30),
+            _cardTipo2(),
+            SizedBox(height: 30),
+            _cardTipo1(),
+            SizedBox(height: 30),
+            _cardTipo2(),
+            SizedBox(height: 30),
+            _cardTipo1(),
+            SizedBox(height: 30),
+            _cardTipo2(),
+            SizedBox(height: 30),
+            _cardTipo1(),
+            SizedBox(height: 30),
+            _cardTipo2(),
+            SizedBox(height: 30),
+            _cardTipo1(),
+            SizedBox(height: 30),
+            _cardTipo2(),
+            SizedBox(height: 30),
+            _cardTipo1(),
+            SizedBox(height: 30),
+            _cardTipo2(),
+            SizedBox(height: 30),
+            _cardTipo1(),
+            SizedBox(height: 30),
+            _cardTipo2()
+          ]),
     );
   }
 
   Widget _cardTipo1() {
     return Card(
+      elevation: 10,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       child: Column(
         children: <Widget>[
           ListTile(
@@ -34,7 +64,10 @@ class CardPage extends StatelessWidget {
   }
 
   Widget _cardTipo2() {
-    return Card(
+    final card = Container(
+      // final card = Card(
+      // Evita que el contenido rebase los bordes de la tarjeta
+      // clipBehavior: Clip.antiAlias,
       child: Column(
         children: <Widget>[
           FadeInImage(
@@ -54,5 +87,18 @@ class CardPage extends StatelessWidget {
         ],
       ),
     );
+
+    return Container(
+        child: ClipRRect(child: card, borderRadius: BorderRadius.circular(30)),
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(30),
+            color: Colors.white,
+            boxShadow: <BoxShadow>[
+              BoxShadow(
+                  color: Colors.black26,
+                  blurRadius: 10,
+                  spreadRadius: 2,
+                  offset: Offset(2, 10)),
+            ]));
   }
 }
