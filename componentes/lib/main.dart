@@ -15,10 +15,11 @@ class MyApp extends StatelessWidget {
       // home: HomePage(),
       initialRoute: '/',
       routes: getApplicationRoutes(),
-      onGenerateRoute: (settings) {
+      onGenerateRoute: (RouteSettings settings) {
         print('Ruta llamada: ${settings.name}');
 
-        return MaterialPageRoute(builder: (context) => AlertPage());
+        return MaterialPageRoute(
+            builder: (BuildContext context) => AlertPage());
       },
     );
   }
