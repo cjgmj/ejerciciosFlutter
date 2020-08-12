@@ -35,7 +35,7 @@ class MovieHorizontal extends StatelessWidget {
   }
 
   Widget _tarjeta(BuildContext context, Pelicula pelicula) {
-    return Container(
+    final tarjeta = Container(
       margin: EdgeInsets.only(right: 15),
       child: Column(children: <Widget>[
         ClipRRect(
@@ -54,11 +54,19 @@ class MovieHorizontal extends StatelessWidget {
         )
       ]),
     );
+
+    return GestureDetector(
+        child: tarjeta,
+        onTap: () {
+          // print('Título: ${pelicula.title}');
+
+          Navigator.pushNamed(context, 'detalle', arguments: pelicula);
+        });
   }
 
-  List<Widget> _tarjetas(BuildContext context) {
-    return peliculas.map((pelicula) {
-      return _tarjeta(context, pelicula);
-    }).toList();
-  }
+  // List<Widget> _tarjetas(BuildContext context) {
+  //   return peliculas.map((pelicula) {
+  //     return _tarjeta(context, pelicula);
+  //   }).toList();
+  // }
 }
