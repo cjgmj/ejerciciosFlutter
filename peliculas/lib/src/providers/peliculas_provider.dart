@@ -12,6 +12,7 @@ class PeliculasProvider {
   String _region = 'es';
 
   int _popularesPage = 0;
+  bool _cargando = false;
 
   List<Pelicula> _populares = new List();
 
@@ -50,6 +51,10 @@ class PeliculasProvider {
   }
 
   Future<List<Pelicula>> getPopulares() async {
+    if (_cargando) return [];
+
+    _cargando = true;
+
     _popularesPage++;
 
     final url = Uri.https(_url, '3/movie/popular', {
@@ -63,6 +68,8 @@ class PeliculasProvider {
 
     _populares.addAll(resp);
     popularesSink(_populares);
+
+    _cargando = false;
 
     return resp;
   }
