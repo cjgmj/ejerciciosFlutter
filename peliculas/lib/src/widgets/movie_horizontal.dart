@@ -21,6 +21,13 @@ class MovieHorizontal extends StatelessWidget {
         // print('Cargar siguientes películas');
         siguientePagina();
       }
+
+      if (_pageController.position.pixels <=
+          _pageController.position.minScrollExtent + 80) {
+        _pageController.position.animateTo(_screenSize.width * 0.3,
+            duration: Duration(milliseconds: 600),
+            curve: Curves.linearToEaseOut);
+      }
     });
 
     return Container(
