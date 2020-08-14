@@ -7,9 +7,21 @@ class BotonesPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Stack(children: <Widget>[
-      _fondoApp(),
-      SingleChildScrollView(child: Column(children: <Widget>[_titulos()]))
-    ]));
+          _fondoApp(),
+          SingleChildScrollView(child: Column(children: <Widget>[_titulos()]))
+        ]),
+        // bottomNavigationBar: BottomNavigationBar(
+        //     // Cambia el color del seleccionado
+        //     fixedColor: Colors.pink,
+        //     items: <BottomNavigationBarItem>[
+        //       BottomNavigationBarItem(
+        //           icon: Icon(Icons.calendar_today), title: Container()),
+        //       BottomNavigationBarItem(
+        //           icon: Icon(Icons.pie_chart_outlined), title: Container()),
+        //       BottomNavigationBarItem(
+        //           icon: Icon(Icons.supervised_user_circle), title: Container())
+        //     ])
+        bottomNavigationBar: _bottomNavigationBar(context));
   }
 
   Widget _fondoApp() {
@@ -54,5 +66,23 @@ class BotonesPage extends StatelessWidget {
                   Text('Classify this transaction into a particular category',
                       style: TextStyle(color: Colors.white, fontSize: 18))
                 ])));
+  }
+
+  Widget _bottomNavigationBar(BuildContext context) {
+    return Theme(
+        data: Theme.of(context).copyWith(
+            canvasColor: Color.fromRGBO(55, 57, 84, 1),
+            primaryColor: Colors.pinkAccent,
+            textTheme: Theme.of(context).textTheme.copyWith(
+                caption: TextStyle(color: Color.fromRGBO(116, 117, 152, 1)))),
+        child: BottomNavigationBar(items: <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+              icon: Icon(Icons.calendar_today, size: 30), title: Container()),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.bubble_chart, size: 30), title: Container()),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.supervised_user_circle, size: 30),
+              title: Container()),
+        ]));
   }
 }
