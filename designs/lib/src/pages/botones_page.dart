@@ -8,7 +8,9 @@ class BotonesPage extends StatelessWidget {
     return Scaffold(
         body: Stack(children: <Widget>[
           _fondoApp(),
-          SingleChildScrollView(child: Column(children: <Widget>[_titulos()]))
+          SingleChildScrollView(
+              child:
+                  Column(children: <Widget>[_titulos(), _botonesRedondeados()]))
         ]),
         // bottomNavigationBar: BottomNavigationBar(
         //     // Cambia el color del seleccionado
@@ -84,5 +86,38 @@ class BotonesPage extends StatelessWidget {
               icon: Icon(Icons.supervised_user_circle, size: 30),
               title: Container()),
         ]));
+  }
+
+  Widget _botonesRedondeados() {
+    return Table(children: <TableRow>[
+      TableRow(
+          children: <Widget>[_crearBotonRedondeado(), _crearBotonRedondeado()]),
+      TableRow(
+          children: <Widget>[_crearBotonRedondeado(), _crearBotonRedondeado()]),
+      TableRow(
+          children: <Widget>[_crearBotonRedondeado(), _crearBotonRedondeado()]),
+      TableRow(
+          children: <Widget>[_crearBotonRedondeado(), _crearBotonRedondeado()])
+    ]);
+  }
+
+  Widget _crearBotonRedondeado() {
+    return Container(
+        height: 180,
+        margin: EdgeInsets.all(15),
+        decoration: BoxDecoration(
+            color: Color.fromRGBO(62, 66, 107, 0.7),
+            borderRadius: BorderRadius.circular(20)),
+        child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: <Widget>[
+              SizedBox(height: 5),
+              CircleAvatar(
+                  child: Icon(Icons.swap_calls, color: Colors.white, size: 30),
+                  radius: 35,
+                  backgroundColor: Colors.pinkAccent),
+              Text('Item', style: TextStyle(color: Colors.pinkAccent)),
+              SizedBox(height: 5)
+            ]));
   }
 }
