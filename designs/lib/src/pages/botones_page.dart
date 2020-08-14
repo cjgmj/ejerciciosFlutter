@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'dart:math';
+import 'dart:ui';
 
 class BotonesPage extends StatelessWidget {
   @override
@@ -90,34 +91,49 @@ class BotonesPage extends StatelessWidget {
 
   Widget _botonesRedondeados() {
     return Table(children: <TableRow>[
-      TableRow(
-          children: <Widget>[_crearBotonRedondeado(), _crearBotonRedondeado()]),
-      TableRow(
-          children: <Widget>[_crearBotonRedondeado(), _crearBotonRedondeado()]),
-      TableRow(
-          children: <Widget>[_crearBotonRedondeado(), _crearBotonRedondeado()]),
-      TableRow(
-          children: <Widget>[_crearBotonRedondeado(), _crearBotonRedondeado()])
+      TableRow(children: <Widget>[
+        _crearBotonRedondeado(Colors.blue, Icons.border_all, 'General'),
+        _crearBotonRedondeado(Colors.purpleAccent, Icons.directions_bus, 'Bus')
+      ]),
+      TableRow(children: <Widget>[
+        _crearBotonRedondeado(Colors.pinkAccent, Icons.shop, 'Buy'),
+        _crearBotonRedondeado(Colors.orange, Icons.insert_drive_file, 'File')
+      ]),
+      TableRow(children: <Widget>[
+        _crearBotonRedondeado(
+            Colors.blueAccent, Icons.movie_filter, 'Entertainment'),
+        _crearBotonRedondeado(Colors.green, Icons.cloud, 'Grocery')
+      ]),
+      TableRow(children: <Widget>[
+        _crearBotonRedondeado(Colors.red, Icons.collections, 'Photos'),
+        _crearBotonRedondeado(Colors.teal, Icons.help_outline, 'Help')
+      ])
     ]);
   }
 
-  Widget _crearBotonRedondeado() {
-    return Container(
-        height: 180,
-        margin: EdgeInsets.all(15),
-        decoration: BoxDecoration(
-            color: Color.fromRGBO(62, 66, 107, 0.7),
-            borderRadius: BorderRadius.circular(20)),
-        child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: <Widget>[
-              SizedBox(height: 5),
-              CircleAvatar(
-                  child: Icon(Icons.swap_calls, color: Colors.white, size: 30),
-                  radius: 35,
-                  backgroundColor: Colors.pinkAccent),
-              Text('Item', style: TextStyle(color: Colors.pinkAccent)),
-              SizedBox(height: 5)
-            ]));
+  Widget _crearBotonRedondeado(Color color, IconData icon, String texto) {
+    return Padding(
+      padding: EdgeInsets.all(15),
+      child: ClipRRect(
+          borderRadius: BorderRadius.circular(20.0),
+          child: BackdropFilter(
+              filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+              child: Container(
+                  height: 180,
+                  decoration: BoxDecoration(
+                      color: Color.fromRGBO(62, 66, 107, 0.7),
+                      borderRadius: BorderRadius.circular(20)),
+                  child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: <Widget>[
+                        SizedBox(height: 5),
+                        CircleAvatar(
+                            child: Icon(icon, color: Colors.white, size: 30),
+                            radius: 35,
+                            backgroundColor: color),
+                        Text(texto, style: TextStyle(color: color)),
+                        SizedBox(height: 5)
+                      ])))),
+    );
   }
 }
