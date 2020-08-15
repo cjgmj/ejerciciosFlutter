@@ -33,19 +33,21 @@ class _HomePageState extends State<HomePage> {
   }
 
   _scanQR() async {
-    dynamic futureString = '';
+    // dynamic futureString = '';
 
-    try {
-      futureString = await BarcodeScanner.scan();
-    } catch (e) {
-      futureString = e.toString();
-    }
+    // try {
+    //   futureString = await BarcodeScanner.scan();
+    // } catch (e) {
+    //   futureString = e.toString();
+    // }
 
-    print('Future String: ${futureString.rawContent}');
+    // print('Future String: ${futureString.rawContent}');
 
-    if (futureString != null) {
-      print('Tenemos información');
-    }
+    // if (futureString != null) {
+    //   print('Tenemos información');
+    // }
+
+    dynamic futureString = 'https://pub.dev/packages/barcode_scan';
   }
 
   Widget _callPage(int paginaActual) {
