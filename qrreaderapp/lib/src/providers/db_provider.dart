@@ -21,7 +21,7 @@ class DBProvider {
     return _database;
   }
 
-  initDB() async {
+  Future<Database> initDB() async {
     Directory documentsDirectory = await getApplicationDocumentsDirectory();
 
     final path = join(documentsDirectory.path, 'ScansDB.db');
@@ -37,7 +37,7 @@ class DBProvider {
   }
 
   // Crear registros
-  nuevoScanRaw(ScanModel nuevoScan) async {
+  Future<int> nuevoScanRaw(ScanModel nuevoScan) async {
     final db = await database;
 
     final res = await db.rawInsert("INSERT INTO Scans (id, tipo valor) "
@@ -47,7 +47,7 @@ class DBProvider {
   }
 
   // Así es como realizaremos las inserciones
-  nuevoScan(ScanModel nuevoScan) async {
+  Future<int> nuevoScan(ScanModel nuevoScan) async {
     final db = await database;
 
     final res = await db.insert('Scans', nuevoScan.toJson());
@@ -92,6 +92,23 @@ class DBProvider {
 
     final res = await db.update('Scans', nuevoScan.toJson(),
         where: 'id = ?', whereArgs: [nuevoScan.id]);
+
+    return res;
+  }
+
+  // Eliminar registros
+  Future<int> deleteScan(int id) async {
+    final db = await database;
+
+    final res = await db.delete('Scans', where: 'id = ?', whereArgs: [id]);
+
+    return res;
+  }
+
+  Future<int> deleteAll() async {
+    final db = await database;
+
+    final res = await db.rawDelete('DELETE FROM Scans');
 
     return res;
   }
