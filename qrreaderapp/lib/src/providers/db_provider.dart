@@ -71,7 +71,7 @@ class DBProvider {
     final res = await db.query('Scans');
 
     List<ScanModel> list =
-        res.isNotEmpty ? res.map((s) => ScanModel.fromJson(s)).toList() : null;
+        res.isNotEmpty ? res.map((s) => ScanModel.fromJson(s)).toList() : [];
 
     return list;
   }

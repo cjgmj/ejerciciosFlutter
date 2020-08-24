@@ -4,7 +4,8 @@ import 'package:barcode_scan/barcode_scan.dart';
 
 import 'package:qrreaderapp/src/pages/direcciones_page.dart';
 import 'package:qrreaderapp/src/pages/mapas_page.dart';
-import 'package:qrreaderapp/src/providers/db_provider.dart';
+import 'package:qrreaderapp/src/models/scan_model.dart';
+import 'package:qrreaderapp/src/bloc/scans_bloc.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -12,6 +13,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final scansBloc = new ScansBloc();
+
   int currentIndex = 0;
 
   @override
@@ -21,7 +24,9 @@ class _HomePageState extends State<HomePage> {
           title: Text('QR Scanner'),
           centerTitle: true,
           actions: <Widget>[
-            IconButton(icon: Icon(Icons.delete_forever), onPressed: () {})
+            IconButton(
+                icon: Icon(Icons.delete_forever),
+                onPressed: scansBloc.borrarScans)
           ],
         ),
         body: _callPage(currentIndex),
@@ -47,7 +52,7 @@ class _HomePageState extends State<HomePage> {
 
     if (futureString != null) {
       final scan = ScanModel(valor: futureString);
-      DBProvider.db.nuevoScan(scan);
+      scansBloc.agregarScan(scan);
     }
   }
 
