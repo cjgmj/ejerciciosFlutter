@@ -4,6 +4,7 @@ import 'package:barcode_scan/barcode_scan.dart';
 
 import 'package:qrreaderapp/src/pages/direcciones_page.dart';
 import 'package:qrreaderapp/src/pages/mapas_page.dart';
+import 'package:qrreaderapp/src/providers/db_provider.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -33,6 +34,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   _scanQR() async {
+    dynamic futureString = 'https://pub.dev/packages/barcode_scan';
     // dynamic futureString = '';
 
     // try {
@@ -43,11 +45,10 @@ class _HomePageState extends State<HomePage> {
 
     // print('Future String: ${futureString.rawContent}');
 
-    // if (futureString != null) {
-    //   print('Tenemos información');
-    // }
-
-    dynamic futureString = 'https://pub.dev/packages/barcode_scan';
+    if (futureString != null) {
+      final scan = ScanModel(valor: futureString);
+      DBProvider.db.nuevoScan(scan);
+    }
   }
 
   Widget _callPage(int paginaActual) {
