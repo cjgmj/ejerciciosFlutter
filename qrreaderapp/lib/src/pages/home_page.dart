@@ -43,24 +43,24 @@ class _HomePageState extends State<HomePage> {
   }
 
   _scanQR(BuildContext context) async {
-    dynamic futureString = 'https://pub.dev/packages/barcode_scan';
-    // dynamic futureString = '';
+    // dynamic futureString = 'https://pub.dev/packages/barcode_scan';
+    dynamic futureString = '';
 
-    // try {
-    //   futureString = await BarcodeScanner.scan();
-    // } catch (e) {
-    //   futureString = e.toString();
-    // }
+    try {
+      futureString = await BarcodeScanner.scan();
+    } catch (e) {
+      futureString = e.toString();
+    }
 
-    // print('Future String: ${futureString.rawContent}');
+    print('Future String: ${futureString.rawContent}');
 
     if (futureString != null) {
-      final scan = ScanModel(valor: futureString);
+      final scan = ScanModel(valor: futureString.rawContent);
       scansBloc.agregarScan(scan);
 
-      final scan2 =
-          ScanModel(valor: 'geo:40.724233047051705,-74.00731459101564');
-      scansBloc.agregarScan(scan2);
+      // final scan2 =
+      //     ScanModel(valor: 'geo:40.724233047051705,-74.00731459101564');
+      // scansBloc.agregarScan(scan2);
 
       if (Platform.isIOS) {
         Future.delayed(Duration(milliseconds: 750), () {
