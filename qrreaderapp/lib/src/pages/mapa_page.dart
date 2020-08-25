@@ -19,7 +19,7 @@ class MapaPage extends StatelessWidget {
   Widget _crearFlutterMap(ScanModel scan) {
     return FlutterMap(
         options: MapOptions(center: scan.getLatLng(), zoom: 15),
-        layers: [_crearMapa()]);
+        layers: [_crearMapa(), _crearMarcadores(scan)]);
   }
 
   _crearMapa() {
@@ -37,5 +37,18 @@ class MapaPage extends StatelessWidget {
           // 'id': 'mapbox/satellite-v9'
           // 'id': 'mapbox/satellite-streets-v11'
         });
+  }
+
+  _crearMarcadores(ScanModel scan) {
+    return MarkerLayerOptions(markers: <Marker>[
+      Marker(
+          width: 100,
+          height: 100,
+          point: scan.getLatLng(),
+          builder: (BuildContext context) => Container(
+                child: Icon(Icons.location_on,
+                    size: 60, color: Theme.of(context).primaryColor),
+              ))
+    ]);
   }
 }
