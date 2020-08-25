@@ -18,11 +18,12 @@ class MapaPage extends StatelessWidget {
 
   Widget _crearFlutterMap(ScanModel scan) {
     return FlutterMap(
-        options: MapOptions(center: scan.getLatLng(), zoom: 10),
+        options: MapOptions(center: scan.getLatLng(), zoom: 15),
         layers: [_crearMapa()]);
   }
 
   _crearMapa() {
+    // Estilos: https://docs.mapbox.com/api/maps/#styles
     return TileLayerOptions(
         urlTemplate: 'https://api.mapbox.com/styles/v1/'
             '{id}/tiles/{z}/{x}/{y}?access_token={accessToken}',
@@ -30,6 +31,11 @@ class MapaPage extends StatelessWidget {
           'accessToken':
               'pk.eyJ1IjoiY2pnbWoiLCJhIjoiY2tlOXltbmU1MmJiYjJ6b2JocWIza2ZxaiJ9.rbpjNhT0JEuzbO0XJ9SPjw',
           'id': 'mapbox/streets-v11'
+          // 'id': 'mapbox/outdoors-v11'
+          // 'id': 'mapbox/light-v10'
+          // 'id': 'mapbox/dark-v10'
+          // 'id': 'mapbox/satellite-v9'
+          // 'id': 'mapbox/satellite-streets-v11'
         });
   }
 }
