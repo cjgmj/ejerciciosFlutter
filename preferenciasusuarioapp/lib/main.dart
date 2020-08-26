@@ -10,6 +10,7 @@ void main() async {
   final prefs = new PreferenciasUsuario();
   await prefs.initPrefs();
 
+  // Oculta la barra de estado
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
     statusBarColor: Colors.transparent,
   ));
@@ -18,12 +19,14 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
+  final prefs = new PreferenciasUsuario();
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Preferencias',
       debugShowCheckedModeBanner: false,
-      initialRoute: HomePage.routeName,
+      initialRoute: prefs.ultimaPagina,
       routes: {
         HomePage.routeName: (BuildContext context) => HomePage(),
         SettingsPage.routeName: (BuildContext context) => SettingsPage()
