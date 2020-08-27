@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:formvalidation/src/pages/home_page.dart';
+import 'package:flutter/services.dart';
 
+import 'package:formvalidation/src/pages/home_page.dart';
 import 'package:formvalidation/src/pages/login_page.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    statusBarColor: Colors.transparent,
+  ));
+
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   @override
