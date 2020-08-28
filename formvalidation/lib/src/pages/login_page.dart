@@ -76,7 +76,7 @@ class LoginPage extends StatelessWidget {
             SizedBox(height: 30),
             _crearPassword(bloc),
             SizedBox(height: 30),
-            _crearBoton()
+            _crearBoton(bloc)
           ])),
       Text('¿Olvidó la contraseña?'),
       SizedBox(height: 100)
@@ -119,16 +119,21 @@ class LoginPage extends StatelessWidget {
         });
   }
 
-  Widget _crearBoton() {
-    return RaisedButton(
-        padding: EdgeInsets.symmetric(horizontal: 80, vertical: 15),
-        child: Container(
-          child: Text('Ingresar'),
-        ),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
-        elevation: 0,
-        color: Colors.deepPurple,
-        textColor: Colors.white,
-        onPressed: () {});
+  Widget _crearBoton(LoginBloc bloc) {
+    return StreamBuilder(
+        stream: bloc.formValidStream,
+        builder: (context, snapshot) {
+          return RaisedButton(
+              padding: EdgeInsets.symmetric(horizontal: 80, vertical: 15),
+              child: Container(
+                child: Text('Ingresar'),
+              ),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(5)),
+              elevation: 0,
+              color: Colors.deepPurple,
+              textColor: Colors.white,
+              onPressed: snapshot.hasData ? () {} : null);
+        });
   }
 }
