@@ -1,6 +1,15 @@
 import 'package:flutter/material.dart';
 
-class ProductoPage extends StatelessWidget {
+import 'package:formvalidation/src/utils/utils.dart' as utils;
+
+class ProductoPage extends StatefulWidget {
+  @override
+  _ProductoPageState createState() => _ProductoPageState();
+}
+
+class _ProductoPageState extends State<ProductoPage> {
+  final formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,25 +25,40 @@ class ProductoPage extends StatelessWidget {
             child: Container(
                 padding: EdgeInsets.all(15),
                 child: Form(
+                    key: formKey,
                     child: Column(
-                  children: <Widget>[
-                    _crearNombre(),
-                    _crearPrecio(),
-                    _crearBoton()
-                  ],
-                )))));
+                      children: <Widget>[
+                        _crearNombre(),
+                        _crearPrecio(),
+                        _crearBoton()
+                      ],
+                    )))));
   }
 
   Widget _crearNombre() {
     return TextFormField(
         textCapitalization: TextCapitalization.sentences,
-        decoration: InputDecoration(labelText: 'Producto'));
+        decoration: InputDecoration(labelText: 'Producto'),
+        validator: (value) {
+          if (value.length < 3) {
+            return 'Ingrese el nombre del producto';
+          } else {
+            return null;
+          }
+        });
   }
 
   Widget _crearPrecio() {
     return TextFormField(
         keyboardType: TextInputType.numberWithOptions(decimal: true),
-        decoration: InputDecoration(labelText: 'Precio'));
+        decoration: InputDecoration(labelText: 'Precio'),
+        validator: (value) {
+          if (utils.isNumeric(value)) {
+            return null;
+          } else {
+            return 'Sólo números';
+          }
+        });
   }
 
   Widget _crearBoton() {
@@ -44,6 +68,12 @@ class ProductoPage extends StatelessWidget {
         textColor: Colors.white,
         label: Text('Guardar'),
         icon: Icon(Icons.save),
-        onPressed: () {});
+        onPressed: _submit);
+  }
+
+  void _submit() {
+    if (!formKey.currentState.validate()) return;
+
+    print('Formulario válido');
   }
 }
