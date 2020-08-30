@@ -148,9 +148,11 @@ class _ProductoPageState extends State<ProductoPage> {
 
   Widget _mostrarFoto() {
     if (producto.fotoUrl != null) {
-      // TODO: mostrar foto
-
-      return Container();
+      return FadeInImage(
+          image: NetworkImage(producto.fotoUrl),
+          placeholder: AssetImage('assets/jar-loading.gif'),
+          height: 300,
+          fit: BoxFit.contain);
     } else {
       return Image(
           image: AssetImage(foto?.path ?? 'assets/no-image.png'),
@@ -171,12 +173,14 @@ class _ProductoPageState extends State<ProductoPage> {
     final _picker = ImagePicker();
     final fotoSeleccionada = await _picker.getImage(source: origen);
 
-    foto = File(fotoSeleccionada.path);
+    if (fotoSeleccionada != null) {
+      foto = File(fotoSeleccionada.path);
 
-    if (foto != null) {
-      // Limpieza
+      if (foto != null) {
+        producto.fotoUrl = null;
+      }
+
+      setState(() {});
     }
-
-    setState(() {});
   }
 }
