@@ -1,9 +1,12 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 
 import 'package:formvalidation/src/utils/utils.dart' as utils;
 
 import 'package:formvalidation/src/models/producto_model.dart';
 import 'package:formvalidation/src/providers/productos_provider.dart';
+import 'package:image_picker/image_picker.dart';
 
 class ProductoPage extends StatefulWidget {
   @override
@@ -17,6 +20,7 @@ class _ProductoPageState extends State<ProductoPage> {
 
   ProductoModel producto = new ProductoModel();
   bool _guardando = false;
+  File foto;
 
   @override
   Widget build(BuildContext context) {
@@ -32,8 +36,9 @@ class _ProductoPageState extends State<ProductoPage> {
           title: Text('Producto'),
           actions: <Widget>[
             IconButton(
-                icon: Icon(Icons.photo_size_select_actual), onPressed: () {}),
-            IconButton(icon: Icon(Icons.camera_alt), onPressed: () {})
+                icon: Icon(Icons.photo_size_select_actual),
+                onPressed: _seleccionarFoto),
+            IconButton(icon: Icon(Icons.camera_alt), onPressed: _hacerFoto)
           ],
         ),
         body: SingleChildScrollView(
@@ -43,6 +48,7 @@ class _ProductoPageState extends State<ProductoPage> {
                     key: formKey,
                     child: Column(
                       children: <Widget>[
+                        _mostrarFoto(),
                         _crearNombre(),
                         _crearPrecio(),
                         _crearDisponible(),
@@ -135,4 +141,33 @@ class _ProductoPageState extends State<ProductoPage> {
 
     scaffoldKey.currentState.showSnackBar(snackbar);
   }
+
+  Widget _mostrarFoto() {
+    if (producto.fotoUrl != null) {
+      // TODO: mostrar foto
+
+      return Container();
+    } else {
+      return Image(
+          image: AssetImage(foto?.path ?? 'assets/no-image.png'),
+          height: 300,
+          fit: BoxFit.cover);
+    }
+  }
+
+  void _seleccionarFoto() async {
+    final _picker = ImagePicker();
+    final fotoSeleccionada =
+        await _picker.getImage(source: ImageSource.gallery);
+
+    foto = File(fotoSeleccionada.path);
+
+    if (foto != null) {
+      // Limpieza
+    }
+
+    setState(() {});
+  }
+
+  void _hacerFoto() {}
 }
