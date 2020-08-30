@@ -12,7 +12,7 @@ class ProductoPage extends StatefulWidget {
 
 class _ProductoPageState extends State<ProductoPage> {
   final formKey = GlobalKey<FormState>();
-  final productoProvider = new ProductosProvider();
+  final productosProvider = new ProductosProvider();
 
   ProductoModel producto = new ProductoModel();
 
@@ -101,6 +101,6 @@ class _ProductoPageState extends State<ProductoPage> {
     print(producto.valor);
     print(producto.disponible);
 
-    productoProvider.crearProducto(producto);
+    productosProvider.crearProducto(producto);
   }
 }
