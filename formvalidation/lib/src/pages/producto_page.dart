@@ -107,7 +107,7 @@ class _ProductoPageState extends State<ProductoPage> {
         onPressed: _guardando ? null : _submit);
   }
 
-  void _submit() {
+  void _submit() async {
     if (!formKey.currentState.validate()) return;
 
     formKey.currentState.save();
@@ -115,6 +115,10 @@ class _ProductoPageState extends State<ProductoPage> {
     setState(() {
       _guardando = true;
     });
+
+    if (foto != null) {
+      producto.fotoUrl = await productosProvider.subirImagen(foto);
+    }
 
     // print(producto.titulo);
     // print(producto.valor);
