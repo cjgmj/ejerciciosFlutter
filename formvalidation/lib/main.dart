@@ -7,11 +7,16 @@ import 'package:formvalidation/src/pages/home_page.dart';
 import 'package:formvalidation/src/pages/login_page.dart';
 import 'package:formvalidation/src/pages/producto_page.dart';
 import 'package:formvalidation/src/pages/registro_page.dart';
+import 'package:formvalidation/src/preferencias_usuario/preferencias_usuario.dart';
 
-void main() {
+void main() async {
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
     statusBarColor: Colors.transparent,
   ));
+
+  WidgetsFlutterBinding.ensureInitialized();
+  final prefs = new PreferenciasUsuario();
+  await prefs.initPrefs();
 
   runApp(MyApp());
 }
@@ -19,6 +24,9 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final prefs = new PreferenciasUsuario();
+    print(prefs.token);
+
     return Provider(
         child: MaterialApp(
             title: 'Material App',
