@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:formvalidation/src/bloc/provider.dart';
 import 'package:formvalidation/src/providers/usuario_provider.dart';
+import 'package:formvalidation/src/utils/utils.dart' as utils;
 
 class RegistroPage extends StatelessWidget {
   final usuarioProvider = new UsuarioProvider();
@@ -143,9 +144,14 @@ class RegistroPage extends StatelessWidget {
         });
   }
 
-  _register(BuildContext context, LoginBloc bloc) {
-    usuarioProvider.nuevoUsuario(bloc.email, bloc.password);
+  _register(BuildContext context, LoginBloc bloc) async {
+    Map<String, dynamic> info =
+        await usuarioProvider.nuevoUsuario(bloc.email, bloc.password);
 
-    // Navigator.pushReplacementNamed(context, 'home');
+    if (info['ok']) {
+      Navigator.pushReplacementNamed(context, 'home');
+    } else {
+      utils.mostrarAlerta(context, 'Ya existe una cuenta con ese email');
+    }
   }
 }
