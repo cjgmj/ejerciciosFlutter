@@ -11,21 +11,20 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final productosProvider = new ProductosProvider();
-
   @override
   Widget build(BuildContext context) {
-    final bloc = Provider.of(context);
+    final productosBloc = Provider.productosBloc(context);
+    productosBloc.cargarProductos();
 
     return Scaffold(
         appBar: AppBar(title: Text('Home Page')),
-        body: _crearListado(),
+        body: _crearListado(productosBloc),
         floatingActionButton: _crearBoton(context));
   }
 
-  Widget _crearListado() {
-    return FutureBuilder(
-      future: productosProvider.cargarProductos(),
+  Widget _crearListado(ProductosBloc productosBloc) {
+    return StreamBuilder(
+      stream: productosBloc.productosStream,
       builder:
           (BuildContext context, AsyncSnapshot<List<ProductoModel>> snapshot) {
         if (snapshot.hasData) {
@@ -33,7 +32,7 @@ class _HomePageState extends State<HomePage> {
           return ListView.builder(
               itemCount: productos.length,
               itemBuilder: (context, index) =>
-                  _crearItem(context, productos[index]));
+                  _crearItem(context, productosBloc, productos[index]));
         } else {
           return Center(child: CircularProgressIndicator());
         }
@@ -41,13 +40,12 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget _crearItem(BuildContext context, ProductoModel producto) {
+  Widget _crearItem(BuildContext context, ProductosBloc productosBloc,
+      ProductoModel producto) {
     return Dismissible(
         key: UniqueKey(),
         background: Container(color: Colors.red),
-        onDismissed: (direccion) {
-          productosProvider.borrarProducto(producto.id);
-        },
+        onDismissed: (direccion) => productosBloc.borrarProducto(producto.id),
         child: Card(
             child: Column(children: <Widget>[
           (producto.fotoUrl == null)
