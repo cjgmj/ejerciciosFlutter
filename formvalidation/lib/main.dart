@@ -6,6 +6,7 @@ import 'package:formvalidation/src/bloc/provider.dart';
 import 'package:formvalidation/src/pages/home_page.dart';
 import 'package:formvalidation/src/pages/login_page.dart';
 import 'package:formvalidation/src/pages/producto_page.dart';
+import 'package:formvalidation/src/pages/registro_page.dart';
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
@@ -22,11 +23,12 @@ class MyApp extends StatelessWidget {
         child: MaterialApp(
             title: 'Material App',
             debugShowCheckedModeBanner: false,
-            initialRoute: 'home',
+            initialRoute: 'login',
             routes: {
               'login': (BuildContext context) => LoginPage(),
               'home': (BuildContext context) => HomePage(),
-              'producto': (BuildContext context) => ProductoPage()
+              'producto': (BuildContext context) => ProductoPage(),
+              'registro': (BuildContext context) => RegistroPage()
             },
             theme: ThemeData(primaryColor: Colors.deepPurple)));
   }
