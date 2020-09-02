@@ -35,15 +35,24 @@ class PushNotificationsProvider {
   Future<dynamic> onMessage(Map<String, dynamic> message) async {
     print('====== onMessage ======');
     print('message: $message');
+
+    final argumento = message['data']['nombre'];
+    print(argumento);
   }
 
   Future<dynamic> onLaunch(Map<String, dynamic> message) async {
     print('====== onLaunch ======');
     print('message: $message');
+
+    final argumento = message['data']['nombre'];
+    print(argumento);
   }
 
   Future<dynamic> onResume(Map<String, dynamic> message) async {
     print('====== onResume ======');
     print('message: $message');
+
+    final argumento = message['data']['nombre'];
+    print(argumento);
   }
 }
