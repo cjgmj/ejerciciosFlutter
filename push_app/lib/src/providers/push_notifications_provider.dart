@@ -41,7 +41,7 @@ class PushNotificationsProvider {
     print('====== onMessage ======');
     // print('message: $message');
 
-    final argumento = message['data']['nombre'];
+    final argumento = message['data']['nombre'] ?? 'no-data';
     // print(argumento);
 
     _mensajesStreamController.sink.add(argumento);
@@ -51,7 +51,7 @@ class PushNotificationsProvider {
     print('====== onLaunch ======');
     // print('message: $message');
 
-    final argumento = message['data']['nombre'];
+    final argumento = message['data']['nombre'] ?? 'no-data';
     // print(argumento);
 
     _mensajesStreamController.sink.add(argumento);
@@ -61,7 +61,7 @@ class PushNotificationsProvider {
     print('====== onResume ======');
     // print('message: $message');
 
-    final argumento = message['data']['nombre'];
+    final argumento = message['data']['nombre'] ?? 'no-data';
     // print(argumento);
 
     _mensajesStreamController.sink.add(argumento);
