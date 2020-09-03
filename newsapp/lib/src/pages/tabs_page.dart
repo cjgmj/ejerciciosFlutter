@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:provider/provider.dart';
 
 class TabsPage extends StatelessWidget {
@@ -22,7 +23,7 @@ class _Navegacion extends StatelessWidget {
           BottomNavigationBarItem(
               icon: Icon(Icons.person_outline), title: Text('Para ti')),
           BottomNavigationBarItem(
-              icon: Icon(Icons.public), title: Text('Encabezados')),
+              icon: Icon(Icons.public), title: Text('Global')),
         ]);
   }
 }
