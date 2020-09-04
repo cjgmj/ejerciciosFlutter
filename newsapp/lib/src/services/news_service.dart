@@ -43,6 +43,9 @@ class NewsService with ChangeNotifier {
     notifyListeners();
   }
 
+  List<Article> get getArticulosCategoriaSeleccionada =>
+      this.categoryArticles[this.selectedCategory];
+
   getTopHeadlines() async {
     final url = '$_URL_NEWS/top-headlines?apiKey=$_APIKEY&country=gb';
     final resp = await http.get(url);
