@@ -271,3 +271,71 @@ class _HeaderWavePainter extends CustomPainter {
     return true;
   }
 }
+
+class HeaderWaveGradient extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        height: double.infinity,
+        width: double.infinity,
+        // Para añadir colores hexadecimales quitar el # y añadir 0xff
+        child: CustomPaint(
+          painter: _HeaderWaveGradientPainter(),
+        ));
+  }
+}
+
+class _HeaderWaveGradientPainter extends CustomPainter {
+  // El size es el tamaño indicado en el Container
+  @override
+  void paint(Canvas canvas, Size size) {
+    final Rect rect = new Rect.fromCircle(center: Offset(0, 55), radius: 180);
+
+    final Gradient gradiente = new LinearGradient(
+        begin: Alignment.topCenter,
+        end: Alignment.bottomCenter,
+        colors: <Color>[
+          Color(0xff6D05E8),
+          Color(0xffC012FF),
+          Color(0xff6D05FA)
+        ],
+        // Posición donde estarán los colores indicados en colors manteniendo
+        // las posiciones anteriores Tienen que tener la misma longitud los
+        // dos arrays
+        stops: [
+          0.2,
+          0.5,
+          1
+        ]);
+
+    // Debería llamarse paint
+    final lapiz = new Paint()..shader = gradiente.createShader(rect);
+
+    // Propiedades
+    // Usa el color del gradiente por lo que no afecta este
+    // lapiz.color = Color(0xff615AAB);
+    // Stroke - pinta bordes
+    // Fill - pinta relleno
+    lapiz.style = PaintingStyle.fill;
+    lapiz.strokeWidth = 2;
+
+    final path = new Path();
+
+    // Dibujar con el path y el lápiz
+    path.lineTo(0, size.height * 0.25);
+    path.quadraticBezierTo(size.width * 0.25, size.height * 0.3,
+        size.width * 0.5, size.height * 0.25);
+    path.quadraticBezierTo(
+        size.width * 0.75, size.height * 0.2, size.width, size.height * 0.25);
+    path.lineTo(size.width, 0);
+
+    canvas.drawPath(path, lapiz);
+  }
+
+  // Le ponemos true ya que no es costoso redibujar este diseño
+  // Para diseños más complejos habría que controlar cuando se redibuja
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) {
+    return true;
+  }
+}
