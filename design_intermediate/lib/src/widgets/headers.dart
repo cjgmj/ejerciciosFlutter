@@ -23,3 +23,16 @@ class HeaderBordesRedondeados extends StatelessWidget {
                 bottomRight: Radius.circular(70))));
   }
 }
+
+class HeaderDiagonal extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Transform.rotate(
+      angle: -0.05,
+      child: Container(
+          height: 300,
+          // Para añadir colores hexadecimales quitar el # y añadir 0xff
+          color: Color(0xff615AAB)),
+    );
+  }
+}
