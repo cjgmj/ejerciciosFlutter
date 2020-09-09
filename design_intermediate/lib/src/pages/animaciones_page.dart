@@ -22,6 +22,7 @@ class _CuadradoAnimadoState extends State<CuadradoAnimado>
   AnimationController controller;
   Animation<double> rotacion;
   Animation<double> opacidad;
+  Animation<double> opacidadOut;
   Animation<double> moverDerecha;
   Animation<double> agrandar;
 
@@ -41,6 +42,13 @@ class _CuadradoAnimadoState extends State<CuadradoAnimado>
             // de la animación
             Interval(0, 0.25, curve: Curves.easeOut)));
 
+    opacidadOut = Tween(begin: 0.0, end: 1.0).animate(CurvedAnimation(
+        parent: controller,
+        curve:
+            // Valores entre 0 y 1 siendo el 1 el tiempo total de la duración
+            // de la animación
+            Interval(0.75, 1.0, curve: Curves.easeOut)));
+
     moverDerecha = Tween(begin: 0.0, end: 200.0)
         .animate(CurvedAnimation(parent: controller, curve: Curves.easeOut));
 
@@ -48,10 +56,10 @@ class _CuadradoAnimadoState extends State<CuadradoAnimado>
         .animate(CurvedAnimation(parent: controller, curve: Curves.easeOut));
 
     controller.addListener(() {
-      // print('Status ${controller.status}');
+      // print('Status: ${controller.status}');
 
       if (controller.status == AnimationStatus.completed) {
-        controller.repeat();
+        // controller.repeat();
         // controller.reverse();
         // controller.reset();
       }
@@ -83,14 +91,18 @@ class _CuadradoAnimadoState extends State<CuadradoAnimado>
       animation: controller,
       child: _Rectangulo(),
       builder: (BuildContext context, Widget child) {
-        // print('Rotación ${rotacion.value}');
+        // print('Status: ${controller.status}');
+        // print('Opacidad: ${opacidad.status}');
+        // print('Rotacion: ${rotacion.status}');
+        // print('Opacidad: ${opacidad.value}');
+        // print('Rotacion: ${rotacion.value}');
 
         return Transform.translate(
           offset: Offset(moverDerecha.value, 0),
           child: Transform.rotate(
               angle: rotacion.value,
               child: Opacity(
-                  opacity: opacidad.value,
+                  opacity: opacidad.value - opacidadOut.value,
                   child: Transform.scale(scale: agrandar.value, child: child))),
         );
       },
