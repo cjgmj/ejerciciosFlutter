@@ -7,17 +7,17 @@ class AnimacionesPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Center(
-      child: CuadradoAnimado(),
+      child: _CuadradoAnimado(),
     ));
   }
 }
 
-class CuadradoAnimado extends StatefulWidget {
+class _CuadradoAnimado extends StatefulWidget {
   @override
   _CuadradoAnimadoState createState() => _CuadradoAnimadoState();
 }
 
-class _CuadradoAnimadoState extends State<CuadradoAnimado>
+class _CuadradoAnimadoState extends State<_CuadradoAnimado>
     with SingleTickerProviderStateMixin {
   AnimationController controller;
   Animation<double> rotacion;
@@ -69,7 +69,7 @@ class _CuadradoAnimadoState extends State<CuadradoAnimado>
     });
 
     // Aquí no se ejecuta cada vez que se hace un hot reload
-    controller.forward();
+    // controller.forward();
 
     super.initState();
   }
