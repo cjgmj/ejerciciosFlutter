@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'dart:math' as Math;
+
 class AnimacionesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -25,7 +27,21 @@ class _CuadradoAnimadoState extends State<CuadradoAnimado>
     controller = new AnimationController(
         vsync: this, duration: Duration(milliseconds: 4000));
 
-    rotacion = Tween(begin: 0.0, end: 2.0).animate(controller);
+    rotacion = Tween(begin: 0.0, end: 2 * Math.pi).animate(controller);
+
+    controller.addListener(() {
+      // print('Status ${controller.status}');
+
+      if (controller.status == AnimationStatus.completed) {
+        controller.reverse();
+      }
+      // else if (controller.status == AnimationStatus.dismissed) {
+      //   controller.forward();
+      // }
+    });
+
+    // Aquí no se ejecuta cada vez que se hace un hot reload
+    controller.forward();
 
     super.initState();
   }
@@ -41,6 +57,7 @@ class _CuadradoAnimadoState extends State<CuadradoAnimado>
   Widget build(BuildContext context) {
     // Play
     controller.forward();
+    // controller.repeat();
 
     return AnimatedBuilder(
       animation: controller,
