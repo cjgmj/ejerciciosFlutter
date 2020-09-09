@@ -32,7 +32,12 @@ class _CuadradoAnimadoState extends State<CuadradoAnimado>
         // Ver animaciones en: https://easings.net/en
         CurvedAnimation(parent: controller, curve: Curves.easeOut));
 
-    opacidad = Tween(begin: 0.1, end: 1.0).animate(controller);
+    opacidad = Tween(begin: 0.1, end: 1.0).animate(CurvedAnimation(
+        parent: controller,
+        curve:
+            // Valores entre 0 y 1 siendo el 1 el tiempo total de la duración
+            // de la animación
+            Interval(0, 0.25, curve: Curves.easeOut)));
 
     controller.addListener(() {
       // print('Status ${controller.status}');
