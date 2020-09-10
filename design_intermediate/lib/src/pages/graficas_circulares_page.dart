@@ -18,7 +18,6 @@ class _GraficasCircularesPageState extends State<GraficasCircularesPage> {
             onPressed: () {
               setState(() {
                 porcentaje += 10;
-
                 if (porcentaje > 100) {
                   porcentaje = 0;
                 }
@@ -28,8 +27,7 @@ class _GraficasCircularesPageState extends State<GraficasCircularesPage> {
             child: Container(
                 width: 300,
                 height: 300,
-                color: Colors.red,
-                child: RadialProgress(porcentaje: 40.0))
+                child: RadialProgress(porcentaje: porcentaje))
             // child: Text('$porcentaje %', style: TextStyle(fontSize: 50))
             ));
   }
