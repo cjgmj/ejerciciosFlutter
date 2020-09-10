@@ -4,8 +4,17 @@ import 'package:flutter/material.dart';
 
 class RadialProgress extends StatefulWidget {
   final porcentaje;
+  final Color colorPrimario;
+  final Color colorSecundario;
+  final double grosorPrimario;
+  final double grosorSecundario;
 
-  RadialProgress({this.porcentaje});
+  RadialProgress(
+      {@required this.porcentaje,
+      this.colorPrimario = Colors.blue,
+      this.colorSecundario = Colors.grey,
+      this.grosorPrimario = 10,
+      this.grosorSecundario = 4});
 
   @override
   _RadialProgressState createState() => _RadialProgressState();
@@ -52,7 +61,11 @@ class _RadialProgressState extends State<RadialProgress>
                 // Con el atributo widget se acceden a las propiedades del Widget
                 painter: _MiRadialProgress(
                     (widget.porcentaje - diferenciaAnimar) +
-                        (diferenciaAnimar * controller.value)),
+                        (diferenciaAnimar * controller.value),
+                    widget.colorPrimario,
+                    widget.colorSecundario,
+                    widget.grosorPrimario,
+                    widget.grosorSecundario),
               ));
         });
   }
@@ -60,15 +73,20 @@ class _RadialProgressState extends State<RadialProgress>
 
 class _MiRadialProgress extends CustomPainter {
   final porcentaje;
+  final colorPrimario;
+  final colorSecundario;
+  final grosorSecundario;
+  final grosorPrimario;
 
-  _MiRadialProgress(this.porcentaje);
+  _MiRadialProgress(this.porcentaje, this.colorPrimario, this.colorSecundario,
+      this.grosorPrimario, this.grosorSecundario);
 
   @override
   void paint(Canvas canvas, Size size) {
     // Círculo completo
     final paint = new Paint()
-      ..strokeWidth = 4
-      ..color = Colors.grey
+      ..strokeWidth = grosorSecundario
+      ..color = colorSecundario
       ..style = PaintingStyle.stroke;
 
     final center = new Offset(size.width * 0.5, size.height * 0.5);
@@ -78,8 +96,8 @@ class _MiRadialProgress extends CustomPainter {
 
     // Arco
     final paintArco = new Paint()
-      ..strokeWidth = 10
-      ..color = Colors.orange
+      ..strokeWidth = grosorPrimario
+      ..color = colorPrimario
       ..style = PaintingStyle.stroke;
 
     // Parte que se irá rellenando
