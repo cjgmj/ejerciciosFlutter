@@ -53,6 +53,11 @@ class _RadialProgressState extends State<RadialProgress>
     return AnimatedBuilder(
         animation: controller,
         builder: (BuildContext context, Widget child) {
+          // Mostrar porcentaje en el centro
+          // return Stack(children: [
+          //   Center(
+          //       child: Text('${widget.porcentaje}%',
+          //           style: TextStyle(fontSize: 20))),
           return Container(
               padding: EdgeInsets.all(10),
               width: double.infinity,
@@ -67,6 +72,7 @@ class _RadialProgressState extends State<RadialProgress>
                     widget.grosorPrimario,
                     widget.grosorSecundario),
               ));
+          // ]);
         });
   }
 }
@@ -98,6 +104,7 @@ class _MiRadialProgress extends CustomPainter {
     final paintArco = new Paint()
       ..strokeWidth = grosorPrimario
       ..color = colorPrimario
+      ..strokeCap = StrokeCap.round
       ..style = PaintingStyle.stroke;
 
     // Parte que se irá rellenando
