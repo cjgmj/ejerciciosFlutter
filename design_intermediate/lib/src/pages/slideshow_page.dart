@@ -8,8 +8,7 @@ class SlideShowPage extends StatelessWidget {
     return Scaffold(
         body: Center(
             child: Column(
-      children: <Widget>[Expanded(child: _Slides()), _Dots()],
-    )));
+                children: <Widget>[Expanded(child: _Slides()), _Dots()])));
   }
 }
 
