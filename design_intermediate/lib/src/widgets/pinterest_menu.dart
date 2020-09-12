@@ -12,39 +12,48 @@ class PinterestMenu extends StatelessWidget {
     PinterestButton(
         icon: Icons.pie_chart,
         onPressed: () {
-          print('Icons pie_chart');
+          print('Icon pie_chart');
         }),
     PinterestButton(
         icon: Icons.search,
         onPressed: () {
-          print('Icons search');
+          print('Icon search');
         }),
     PinterestButton(
         icon: Icons.notifications,
         onPressed: () {
-          print('Icons notifications');
+          print('Icon notifications');
         }),
     PinterestButton(
         icon: Icons.supervised_user_circle,
         onPressed: () {
-          print('Icons supervised_user_circle');
+          print('Icon supervised_user_circle');
         })
   ];
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-        child: Container(
-            child: _MenuItems(items),
-            width: 250,
-            height: 60,
-            decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.all(Radius.circular(100)),
-                boxShadow: <BoxShadow>[
-                  BoxShadow(
-                      color: Colors.black38, blurRadius: 10, spreadRadius: -5)
-                ])));
+    return Center(child: _PinterestMenuBackground(child: _MenuItems(items)));
+  }
+}
+
+class _PinterestMenuBackground extends StatelessWidget {
+  final Widget child;
+
+  _PinterestMenuBackground({@required this.child});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        child: child,
+        width: 250,
+        height: 60,
+        decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.all(Radius.circular(100)),
+            boxShadow: <BoxShadow>[
+              BoxShadow(color: Colors.black38, blurRadius: 10, spreadRadius: -5)
+            ]));
   }
 }
 
@@ -71,6 +80,12 @@ class _PinterestMenuButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(child: Icon(item.icon));
+    return GestureDetector(
+        onTap: item.onPressed,
+        // Añadido porque en algunos dispositivos
+        // no funciona bien el onTap
+        behavior: HitTestBehavior.translucent,
+        child: Container(
+            child: Icon(item.icon, size: 25, color: Colors.blueGrey)));
   }
 }
