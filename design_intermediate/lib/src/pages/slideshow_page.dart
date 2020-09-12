@@ -8,13 +8,23 @@ class SlideshowPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Slideshow(
-            bulletPrimario: 18,
-            bulletSecundario: 12,
-            // puntosArriba: true,
-            colorPrimario: Color(0xffFF5A7E),
-            colorSecundario: Colors.red[100],
-            slides: <Widget>[
+        body: Column(children: <Widget>[
+      Expanded(child: MiSlideShow()),
+      Expanded(child: MiSlideShow())
+    ]));
+  }
+}
+
+class MiSlideShow extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Slideshow(
+        bulletPrimario: 18,
+        bulletSecundario: 12,
+        // puntosArriba: true,
+        colorPrimario: Color(0xffFF5A7E),
+        colorSecundario: Colors.red[100],
+        slides: <Widget>[
           SvgPicture.asset('assets/svgs/slide-1.svg'),
           SvgPicture.asset('assets/svgs/slide-2.svg'),
           SvgPicture.asset('assets/svgs/slide-3.svg'),
@@ -22,6 +32,6 @@ class SlideshowPage extends StatelessWidget {
           SvgPicture.asset('assets/svgs/slide-5.svg')
           // Text('Hola Mundo'),
           // Container(width: 200, height: 200, color: Colors.blue)
-        ]));
+        ]);
   }
 }
