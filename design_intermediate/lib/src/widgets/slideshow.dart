@@ -7,12 +7,16 @@ class Slideshow extends StatelessWidget {
   final bool puntosArriba;
   final Color colorPrimario;
   final Color colorSecundario;
+  final double bulletPrimario;
+  final double bulletSecundario;
 
   Slideshow(
       {@required this.slides,
       this.puntosArriba = false,
       this.colorPrimario = Colors.blue,
-      this.colorSecundario = Colors.grey});
+      this.colorSecundario = Colors.grey,
+      this.bulletPrimario = 12,
+      this.bulletSecundario = 12});
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +28,8 @@ class Slideshow extends StatelessWidget {
 
           slideshowModel.colorPrimario = this.colorPrimario;
           slideshowModel.colorSecundario = this.colorSecundario;
+          slideshowModel.bulletPrimario = this.bulletPrimario;
+          slideshowModel.bulletSecundario = this.bulletSecundario;
 
           return _CrearEstructuraSlideshow(
               puntosArriba: puntosArriba, slides: slides);
@@ -77,17 +83,24 @@ class _Dot extends StatelessWidget {
     // final pageViewIndex = Provider.of<_SlideshowModel>(context).currentPage;
     final slideshowModel = Provider.of<_SlideshowModel>(context);
 
+    double size = 0;
+    Color color;
+
+    if (slideshowModel.currentPage >= index - 0.5 &&
+        slideshowModel.currentPage < index + 0.5) {
+      size = slideshowModel.bulletPrimario;
+      color = slideshowModel.colorPrimario;
+    } else {
+      size = slideshowModel.bulletSecundario;
+      color = slideshowModel.colorSecundario;
+    }
+
     return AnimatedContainer(
         duration: Duration(milliseconds: 200),
-        width: 12,
-        height: 12,
+        width: size,
+        height: size,
         margin: EdgeInsets.symmetric(horizontal: 5),
-        decoration: BoxDecoration(
-            color: (slideshowModel.currentPage >= index - 0.5 &&
-                    slideshowModel.currentPage < index + 0.5)
-                ? slideshowModel.colorPrimario
-                : slideshowModel.colorSecundario,
-            shape: BoxShape.circle));
+        decoration: BoxDecoration(color: color, shape: BoxShape.circle));
   }
 }
 
@@ -148,6 +161,8 @@ class _SlideshowModel with ChangeNotifier {
   double _currentPage = 0;
   Color _colorPrimario = Colors.blue;
   Color _colorSecundario = Colors.grey;
+  double _bulletPrimario = 12;
+  double _bulletSecundario = 12;
 
   double get currentPage => this._currentPage;
 
@@ -160,13 +175,23 @@ class _SlideshowModel with ChangeNotifier {
 
   set colorPrimario(Color colorPrimario) {
     this._colorPrimario = colorPrimario;
-    notifyListeners();
   }
 
   Color get colorSecundario => this._colorSecundario;
 
   set colorSecundario(Color colorSecundario) {
     this._colorSecundario = colorSecundario;
-    notifyListeners();
+  }
+
+  double get bulletPrimario => this._bulletPrimario;
+
+  set bulletPrimario(double bulletPrimario) {
+    this._bulletPrimario = bulletPrimario;
+  }
+
+  double get bulletSecundario => this._bulletSecundario;
+
+  set bulletSecundario(double bulletSecundario) {
+    this._bulletSecundario = bulletSecundario;
   }
 }
