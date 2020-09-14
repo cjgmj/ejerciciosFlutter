@@ -37,27 +37,43 @@ class _Titulo extends StatelessWidget {
 }
 
 class _ListaTareas extends StatelessWidget {
+  final items = [
+    _ListItem('Orange', Color(0xffF08F66)),
+    _ListItem('Family', Color(0xffF2A38A)),
+    _ListItem('Subscriptions', Color(0xffF7CDD5)),
+    _ListItem('Books', Color(0xffFCEBAF)),
+    _ListItem('Orange', Color(0xffF08F66)),
+    _ListItem('Family', Color(0xffF2A38A)),
+    _ListItem('Subscriptions', Color(0xffF7CDD5)),
+    _ListItem('Books', Color(0xffFCEBAF)),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-        itemCount: 20,
-        itemBuilder: (BuildContext context, int index) => _ListItem());
+        itemCount: items.length,
+        itemBuilder: (BuildContext context, int index) => items[index]);
   }
 }
 
 class _ListItem extends StatelessWidget {
+  final String titulo;
+  final Color color;
+
+  const _ListItem(this.titulo, this.color);
+
   @override
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.centerLeft,
       padding: EdgeInsets.all(30),
-      child: Text('Orange',
+      child: Text(this.titulo,
           style: TextStyle(
               color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20)),
       height: 130,
       margin: EdgeInsets.all(10),
       decoration: BoxDecoration(
-          color: Colors.orange, borderRadius: BorderRadius.circular(30)),
+          color: this.color, borderRadius: BorderRadius.circular(30)),
     );
   }
 }
