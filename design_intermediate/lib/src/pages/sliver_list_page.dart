@@ -3,7 +3,35 @@ import 'package:flutter/material.dart';
 class SliverListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: _MainScroll());
+    return Scaffold(
+        body: Stack(
+      children: <Widget>[
+        _MainScroll(),
+        Positioned(bottom: -10, right: 0, child: _BotonNewList())
+      ],
+    ));
+  }
+}
+
+class _BotonNewList extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+
+    return ButtonTheme(
+        minWidth: size.width * 0.9,
+        height: 100,
+        child: RaisedButton(
+            onPressed: () {},
+            color: Color(0xffED6762),
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.only(topLeft: Radius.circular(50))),
+            child: Text('CREATE NEW LIST',
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 3))));
   }
 }
 
