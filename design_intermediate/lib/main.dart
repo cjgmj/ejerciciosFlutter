@@ -9,7 +9,8 @@ import 'package:flutter/material.dart';
 // import 'package:design_intermediate/src/pages/slideshow_page.dart';
 // import 'package:design_intermediate/src/pages/pinterest_page.dart';
 // import 'package:design_intermediate/src/pages/emergency_page.dart';
-import 'package:design_intermediate/src/pages/sliver_list_page.dart';
+// import 'package:design_intermediate/src/pages/sliver_list_page.dart';
+import 'package:design_intermediate/src/pages/launcher_page.dart';
 
 void main() => runApp(MyApp());
 
@@ -19,6 +20,6 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Diseños App',
-        home: SliverListPage());
+        home: LauncherPage());
   }
 }
