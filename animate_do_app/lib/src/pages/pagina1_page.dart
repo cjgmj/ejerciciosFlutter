@@ -1,3 +1,4 @@
+import 'package:animate_do_app/src/pages/navegacion_page.dart';
 import 'package:animate_do_app/src/pages/twitter_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -24,22 +25,26 @@ class Pagina1Page extends StatelessWidget {
                             builder: (BuildContext context) => TwitterPage()));
                   }),
               SlideInLeft(
-                from: 50,
-                child: IconButton(
-                    icon: Icon(Icons.navigate_next),
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          CupertinoPageRoute(
-                              builder: (BuildContext context) =>
-                                  Pagina1Page()));
-                    }),
-              )
+                  from: 50,
+                  child: IconButton(
+                      icon: Icon(Icons.navigate_next),
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            CupertinoPageRoute(
+                                builder: (BuildContext context) =>
+                                    Pagina1Page()));
+                      }))
             ]),
         floatingActionButton: ElasticInRight(
-          child: FloatingActionButton(
-              child: FaIcon(FontAwesomeIcons.play), onPressed: () {}),
-        ),
+            child: FloatingActionButton(
+                child: FaIcon(FontAwesomeIcons.play),
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (BuildContext context) => NavegacionPage()));
+                })),
         body: Center(
             child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
