@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
 
+import 'package:animate_do/animate_do.dart';
+
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class NavegacionPage extends StatelessWidget {
@@ -38,14 +40,25 @@ class BottomNavigation extends StatelessWidget {
                   right: 0,
                   // child: Icon(Icons.brightness_1,
                   //     color: Colors.redAccent, size: 8))
-                  child: Container(
-                      child: Text('$numero',
-                          style: TextStyle(color: Colors.white, fontSize: 7)),
-                      alignment: Alignment.center,
-                      width: 12,
-                      height: 12,
-                      decoration: BoxDecoration(
-                          color: Colors.redAccent, shape: BoxShape.circle))),
+                  child: BounceInDown(
+                    from: 10,
+                    animate: numero > 0,
+                    child: Bounce(
+                      from: 10,
+                      controller: (controller) =>
+                          Provider.of<_NotificationModel>(context)
+                              .bounceController = controller,
+                      child: Container(
+                          child: Text('$numero',
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 7)),
+                          alignment: Alignment.center,
+                          width: 12,
+                          height: 12,
+                          decoration: BoxDecoration(
+                              color: Colors.redAccent, shape: BoxShape.circle)),
+                    ),
+                  )),
             ])),
         BottomNavigationBarItem(
             title: Text('My Dog'), icon: FaIcon(FontAwesomeIcons.dog))
@@ -61,18 +74,26 @@ class BotonFlotante extends StatelessWidget {
         backgroundColor: Colors.pink,
         child: FaIcon(FontAwesomeIcons.play),
         onPressed: () {
-          int numero =
-              Provider.of<_NotificationModel>(context, listen: false).numero;
+          final notificationModel =
+              Provider.of<_NotificationModel>(context, listen: false);
+
+          int numero = notificationModel.numero;
           numero++;
 
-          Provider.of<_NotificationModel>(context, listen: false).numero =
-              numero;
+          notificationModel.numero = numero;
+
+          if (numero >= 2) {
+            final controller = notificationModel.bounceController;
+
+            controller.forward(from: 0.0);
+          }
         });
   }
 }
 
 class _NotificationModel extends ChangeNotifier {
   int _numero = 0;
+  AnimationController _bounceController;
 
   int get numero => this._numero;
 
@@ -80,5 +101,11 @@ class _NotificationModel extends ChangeNotifier {
     this._numero = numero;
 
     notifyListeners();
+  }
+
+  AnimationController get bounceController => this._bounceController;
+
+  set bounceController(AnimationController bounceController) {
+    this._bounceController = bounceController;
   }
 }
