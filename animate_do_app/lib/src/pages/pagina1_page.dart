@@ -1,3 +1,4 @@
+import 'package:animate_do_app/src/pages/twitter_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -15,7 +16,13 @@ class Pagina1Page extends StatelessWidget {
                 child: Text('Animate_do')),
             actions: <Widget>[
               IconButton(
-                  icon: FaIcon(FontAwesomeIcons.twitter), onPressed: () {}),
+                  icon: FaIcon(FontAwesomeIcons.twitter),
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (BuildContext context) => TwitterPage()));
+                  }),
               SlideInLeft(
                 from: 50,
                 child: IconButton(
