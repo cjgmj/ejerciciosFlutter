@@ -10,8 +10,12 @@ import 'package:design_intermediate/src/theme/theme.dart';
 class LauncherPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final currentTheme = Provider.of<ThemeChanger>(context).currentTheme;
+
     return Scaffold(
-        appBar: AppBar(title: Text('Diseños en Flutter')),
+        appBar: AppBar(
+            title: Text('Diseños en Flutter'),
+            backgroundColor: currentTheme.accentColor),
         drawer: _MenuPrincipal(),
         body: _ListaOpciones());
   }
@@ -20,18 +24,19 @@ class LauncherPage extends StatelessWidget {
 class _ListaOpciones extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final appTheme = Provider.of<ThemeChanger>(context).currentTheme;
+    final currentTheme = Provider.of<ThemeChanger>(context).currentTheme;
 
     return ListView.separated(
         physics: BouncingScrollPhysics(),
         separatorBuilder: (context, index) =>
-            Divider(color: appTheme.primaryColorLight),
+            Divider(color: currentTheme.primaryColorLight),
         itemCount: pageRoutes.length,
         itemBuilder: (context, index) => ListTile(
             leading:
-                FaIcon(pageRoutes[index].icon, color: appTheme.accentColor),
+                FaIcon(pageRoutes[index].icon, color: currentTheme.accentColor),
             title: Text(pageRoutes[index].titulo),
-            trailing: Icon(Icons.chevron_right, color: appTheme.accentColor),
+            trailing:
+                Icon(Icons.chevron_right, color: currentTheme.accentColor),
             onTap: () {
               Navigator.push(
                   context,
