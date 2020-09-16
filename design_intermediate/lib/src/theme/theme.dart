@@ -26,6 +26,14 @@ class ThemeChanger with ChangeNotifier {
       case 3: // custom
         _darkTheme = false;
         _customTheme = true;
+        _currentTheme = ThemeData.dark().copyWith(
+            accentColor: Color(0xff48A0EB),
+            primaryColorLight: Colors.white,
+            scaffoldBackgroundColor: Color(0xff16202B),
+            appBarTheme: AppBarTheme(color: Color(0xff16202B)),
+            floatingActionButtonTheme: FloatingActionButtonThemeData(
+                backgroundColor: Color(0xff48A0EB)),
+            textTheme: TextTheme(bodyText1: TextStyle(color: Colors.white)));
         break;
       default:
         _darkTheme = false;
@@ -52,7 +60,14 @@ class ThemeChanger with ChangeNotifier {
     _customTheme = value;
 
     if (value) {
-      _currentTheme = ThemeData.light();
+      _currentTheme = ThemeData.dark().copyWith(
+          accentColor: Color(0xff48A0EB),
+          primaryColorLight: Colors.white,
+          scaffoldBackgroundColor: Color(0xff16202B),
+          appBarTheme: AppBarTheme(color: Color(0xff16202B)),
+          floatingActionButtonTheme:
+              FloatingActionButtonThemeData(backgroundColor: Color(0xff48A0EB)),
+          textTheme: TextTheme(bodyText1: TextStyle(color: Colors.white)));
     } else {
       _currentTheme = ThemeData.light();
     }
