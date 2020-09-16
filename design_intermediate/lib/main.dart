@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import 'package:design_intermediate/src/theme/theme.dart';
 import 'package:design_intermediate/src/pages/launcher_page.dart';
+import 'package:design_intermediate/src/pages/launcher_tablet_page.dart';
 
 void main() => runApp(
     ChangeNotifierProvider(create: (_) => new ThemeChanger(2), child: MyApp()));
@@ -18,9 +19,17 @@ class MyApp extends StatelessWidget {
         title: 'Diseños App',
         home: OrientationBuilder(
             builder: (BuildContext context, Orientation orientation) {
-          print('Orientarion $orientation');
+          // print('Orientarion $orientation');
 
-          return Container(child: LauncherPage());
+          // return Container(child: LauncherPage());
+
+          final screenSize = MediaQuery.of(context).size;
+
+          if (screenSize.width > 500) {
+            return LauncherTabletPage();
+          } else {
+            return LauncherPage();
+          }
         }));
   }
 }

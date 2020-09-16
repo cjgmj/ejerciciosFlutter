@@ -16,3 +16,4 @@ For help getting started with Flutter, view our
 samples, guidance on mobile development, and a full API reference.
 
 #### flutter run -d all para lanzar la aplicación en varios dispositivos simultáneamente
+### Mientras el comando esté ejecutándose pulsar r para hacer un hot reload o shift + r para hacer un hot restart
