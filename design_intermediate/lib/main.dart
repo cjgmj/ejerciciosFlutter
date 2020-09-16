@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 // import 'package:design_intermediate/src/pages/headers_page.dart';
 // import 'package:design_intermediate/src/pages/animaciones_page.dart';
@@ -10,9 +11,11 @@ import 'package:flutter/material.dart';
 // import 'package:design_intermediate/src/pages/pinterest_page.dart';
 // import 'package:design_intermediate/src/pages/emergency_page.dart';
 // import 'package:design_intermediate/src/pages/sliver_list_page.dart';
+import 'package:design_intermediate/src/theme/theme.dart';
 import 'package:design_intermediate/src/pages/launcher_page.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(
+    ChangeNotifierProvider(create: (_) => new ThemeChanger(), child: MyApp()));
 
 class MyApp extends StatelessWidget {
   @override
