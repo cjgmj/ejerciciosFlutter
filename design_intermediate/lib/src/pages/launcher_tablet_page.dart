@@ -6,12 +6,14 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:design_intermediate/src/routes/routes.dart';
 
 import 'package:design_intermediate/src/theme/theme.dart';
+import 'package:design_intermediate/src/models/layout_model.dart';
 import 'package:design_intermediate/src/pages/slideshow_page.dart';
 
 class LauncherTabletPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final appTheme = Provider.of<ThemeChanger>(context);
+    final layoutModel = Provider.of<LayoutModel>(context);
 
     return Scaffold(
         appBar: AppBar(
@@ -29,7 +31,7 @@ class LauncherTabletPage extends StatelessWidget {
                 color: appTheme.darkTheme
                     ? Colors.grey
                     : appTheme.currentTheme.accentColor),
-            Expanded(child: SlideshowPage())
+            Expanded(child: layoutModel.currentPage)
           ],
         ));
   }
@@ -52,10 +54,14 @@ class _ListaOpciones extends StatelessWidget {
             trailing:
                 Icon(Icons.chevron_right, color: currentTheme.accentColor),
             onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => pageRoutes[index].page));
+              // Navigator.push(
+              //     context,
+              //     MaterialPageRoute(
+              //         builder: (context) => pageRoutes[index].page));
+
+              final layoutModel =
+                  Provider.of<LayoutModel>(context, listen: false);
+              layoutModel.currentPage = pageRoutes[index].page;
             }));
   }
 }

@@ -1,3 +1,4 @@
+import 'package:design_intermediate/src/models/layout_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -5,8 +6,13 @@ import 'package:design_intermediate/src/theme/theme.dart';
 import 'package:design_intermediate/src/pages/launcher_page.dart';
 import 'package:design_intermediate/src/pages/launcher_tablet_page.dart';
 
-void main() => runApp(
-    ChangeNotifierProvider(create: (_) => new ThemeChanger(2), child: MyApp()));
+void main() => runApp(MultiProvider(providers: [
+      ChangeNotifierProvider<ThemeChanger>(create: (_) => new ThemeChanger(2)),
+      ChangeNotifierProvider<LayoutModel>(create: (_) => new LayoutModel())
+    ], child: MyApp()));
+
+// void main() => runApp(
+//     ChangeNotifierProvider(create: (_) => new ThemeChanger(2), child: MyApp()));
 
 class MyApp extends StatelessWidget {
   @override
