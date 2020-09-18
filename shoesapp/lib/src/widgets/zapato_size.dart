@@ -113,11 +113,13 @@ class _TallaZapatoCaja extends StatelessWidget {
 class _ZapatoConSombra extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final zapatoModel = Provider.of<ZapatoModel>(context);
+
     return Padding(
       padding: EdgeInsets.all(50),
       child: Stack(children: <Widget>[
         Positioned(bottom: 20, right: 0, child: _ZapatoSombra()),
-        Image(image: AssetImage('assets/imgs/azul.png'))
+        Image(image: AssetImage(zapatoModel.assetImage))
       ]),
     );
   }
