@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import 'package:shoesapp/src/models/zapato_model.dart';
 import 'package:shoesapp/src/pages/zapato_desc_page.dart';
 
 class ZapatoSizePreview extends StatelessWidget {
@@ -72,25 +75,38 @@ class _TallaZapatoCaja extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        alignment: Alignment.center,
-        child: Text('${numero.toString().replaceAll('.0', '')}',
-            style: TextStyle(
-                color: this.numero == 9 ? Colors.white : Color(0xffF1A23A),
-                fontSize: 16,
-                fontWeight: FontWeight.bold)),
-        width: 45,
-        height: 45,
-        decoration: BoxDecoration(
-            color: this.numero == 9 ? Color(0xffF1A23A) : Colors.white,
-            borderRadius: BorderRadius.circular(10),
-            boxShadow: <BoxShadow>[
-              if (this.numero == 9)
-                BoxShadow(
-                    color: Color(0xffF1A23A),
-                    blurRadius: 10,
-                    offset: Offset(0, 5))
-            ]));
+    final zapatoModel = Provider.of<ZapatoModel>(context);
+
+    return GestureDetector(
+      onTap: () {
+        final zapatoModel = Provider.of<ZapatoModel>(context, listen: false);
+
+        zapatoModel.talla = this.numero;
+      },
+      child: Container(
+          alignment: Alignment.center,
+          child: Text('${numero.toString().replaceAll('.0', '')}',
+              style: TextStyle(
+                  color: this.numero == zapatoModel.talla
+                      ? Colors.white
+                      : Color(0xffF1A23A),
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold)),
+          width: 45,
+          height: 45,
+          decoration: BoxDecoration(
+              color: this.numero == zapatoModel.talla
+                  ? Color(0xffF1A23A)
+                  : Colors.white,
+              borderRadius: BorderRadius.circular(10),
+              boxShadow: <BoxShadow>[
+                if (this.numero == zapatoModel.talla)
+                  BoxShadow(
+                      color: Color(0xffF1A23A),
+                      blurRadius: 10,
+                      offset: Offset(0, 5))
+              ])),
+    );
   }
 }
 
