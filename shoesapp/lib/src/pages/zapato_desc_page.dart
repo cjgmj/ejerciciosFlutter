@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:animate_do/animate_do.dart';
+
 import 'package:shoesapp/src/widgets/custom_widgets.dart';
 
 class ZapatoDescPage extends StatelessWidget {
@@ -8,13 +10,15 @@ class ZapatoDescPage extends StatelessWidget {
     return Scaffold(
         body: Column(children: <Widget>[
       Stack(children: <Widget>[
-        ZapatoSizePreview(fullScreen: true),
+        Hero(tag: 'zapato-1', child: ZapatoSizePreview(fullScreen: true)),
         Positioned(
             top: 60,
             left: 10,
             child: FloatingActionButton(
               child: Icon(Icons.chevron_left, color: Colors.white, size: 60),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pop(context);
+              },
               backgroundColor: Colors.transparent,
               elevation: 0,
               highlightElevation: 0,
@@ -44,7 +48,7 @@ class _BotonesLikeCartSettings extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
-          _BotonSombreado(Icon(Icons.star, color: Colors.red, size: 25)),
+          _BotonSombreado(Icon(Icons.favorite, color: Colors.red, size: 25)),
           _BotonSombreado(Icon(Icons.add_shopping_cart,
               color: Colors.grey.withOpacity(0.4), size: 25)),
           _BotonSombreado(Icon(Icons.settings,
@@ -87,10 +91,10 @@ class _ColoresYMas extends StatelessWidget {
         child: Row(children: <Widget>[
           Expanded(
               child: Stack(children: <Widget>[
-            Positioned(left: 90, child: _BotonColor(Color(0xffC6D642))),
-            Positioned(left: 60, child: _BotonColor(Color(0xffFFAD29))),
-            Positioned(left: 30, child: _BotonColor(Color(0xff2099F1))),
-            _BotonColor(Color(0xff364D56)),
+            Positioned(left: 90, child: _BotonColor(Color(0xffC6D642), 4)),
+            Positioned(left: 60, child: _BotonColor(Color(0xffFFAD29), 3)),
+            Positioned(left: 30, child: _BotonColor(Color(0xff2099F1), 2)),
+            _BotonColor(Color(0xff364D56), 1),
           ])),
           BotonNaranja(
             texto: 'More related items',
@@ -104,15 +108,20 @@ class _ColoresYMas extends StatelessWidget {
 
 class _BotonColor extends StatelessWidget {
   final Color color;
+  final int index;
 
-  const _BotonColor(this.color);
+  const _BotonColor(this.color, this.index);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        width: 45,
-        height: 45,
-        decoration: BoxDecoration(color: color, shape: BoxShape.circle));
+    return FadeInLeft(
+      delay: Duration(milliseconds: this.index * 100),
+      duration: Duration(milliseconds: 300),
+      child: Container(
+          width: 45,
+          height: 45,
+          decoration: BoxDecoration(color: color, shape: BoxShape.circle)),
+    );
   }
 }
 
@@ -127,11 +136,15 @@ class _PrecioBuyNow extends StatelessWidget {
               Text('\$180.0',
                   style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold)),
               Spacer(),
-              BotonNaranja(
-                  texto: 'Buy now',
-                  ancho: 120,
-                  alto: 40,
-                  color: Color(0xffF1A23A))
+              Bounce(
+                delay: Duration(seconds: 1),
+                from: 8,
+                child: BotonNaranja(
+                    texto: 'Buy now',
+                    ancho: 120,
+                    alto: 40,
+                    color: Color(0xffF1A23A)),
+              )
             ])));
   }
 }

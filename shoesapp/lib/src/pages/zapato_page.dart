@@ -15,7 +15,7 @@ class ZapatoPage extends StatelessWidget {
           child: SingleChildScrollView(
               physics: BouncingScrollPhysics(),
               child: Column(children: <Widget>[
-                ZapatoSizePreview(),
+                Hero(tag: 'zapato-1', child: ZapatoSizePreview()),
                 ZapatoDescripcion(
                     titulo: 'Nike Air Max 720',
                     descripcion:
