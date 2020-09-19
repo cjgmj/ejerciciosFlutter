@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import 'package:animate_do/animate_do.dart';
 
 import 'package:music_player/src/helpers/helpers.dart';
+import 'package:music_player/src/models/audioplayer_model.dart';
 
 import 'package:music_player/src/widgets/custom_appbar.dart';
 
@@ -106,13 +110,17 @@ class _TituloPlayState extends State<TituloPlay>
                   icon: AnimatedIcons.play_pause, progress: this.playAnimation),
               backgroundColor: Color(0xffF8CB51),
               onPressed: () {
-                // TODO Botón
+                final audioPlayerModel =
+                    Provider.of<AudioPlayerModel>(context, listen: false);
+
                 if (this.isPlaying) {
                   this.playAnimation.reverse();
                   this.isPlaying = false;
+                  audioPlayerModel.controller.stop();
                 } else {
                   this.playAnimation.forward();
                   this.isPlaying = true;
+                  audioPlayerModel.controller.repeat();
                 }
               })
         ]));
@@ -174,6 +182,8 @@ class BarraProgreso extends StatelessWidget {
 class ImagenDisco extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final audioPlayerModel = Provider.of<AudioPlayerModel>(context);
+
     return Container(
       padding: EdgeInsets.all(20),
       width: 250,
@@ -181,7 +191,14 @@ class ImagenDisco extends StatelessWidget {
       child: ClipRRect(
           borderRadius: BorderRadius.circular(200),
           child: Stack(alignment: Alignment.center, children: <Widget>[
-            Image(image: AssetImage('assets/aurora.jpg')),
+            SpinPerfect(
+                duration: Duration(seconds: 10),
+                animate: false,
+                infinite: true,
+                manualTrigger: true,
+                controller: (animationController) =>
+                    audioPlayerModel.controller = animationController,
+                child: Image(image: AssetImage('assets/aurora.jpg'))),
             Container(
                 width: 25,
                 height: 25,
