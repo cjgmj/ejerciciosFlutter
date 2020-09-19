@@ -150,32 +150,29 @@ class BarraProgreso extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Column(
+        child: Column(children: <Widget>[
+      Text('00:00', style: estilo),
+      SizedBox(height: 10),
+      Stack(
         children: <Widget>[
-          Text('00:00', style: estilo),
-          SizedBox(height: 10),
-          Stack(
-            children: <Widget>[
-              Container(
-                width: 3,
-                height: 230,
-                color: Colors.white.withOpacity(0.1),
-              ),
-              Positioned(
-                bottom: 0,
-                child: Container(
-                  width: 3,
-                  height: 100,
-                  color: Colors.white.withOpacity(0.8),
-                ),
-              )
-            ],
+          Container(
+            width: 3,
+            height: 230,
+            color: Colors.white.withOpacity(0.1),
           ),
-          SizedBox(height: 10),
-          Text('00:00', style: estilo),
+          Positioned(
+            bottom: 0,
+            child: Container(
+              width: 3,
+              height: 100,
+              color: Colors.white.withOpacity(0.8),
+            ),
+          )
         ],
       ),
-    );
+      SizedBox(height: 10),
+      Text('00:00', style: estilo)
+    ]));
   }
 }
 
