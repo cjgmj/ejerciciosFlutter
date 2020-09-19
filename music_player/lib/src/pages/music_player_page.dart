@@ -59,7 +59,31 @@ class Lyrics extends StatelessWidget {
   }
 }
 
-class TituloPlay extends StatelessWidget {
+class TituloPlay extends StatefulWidget {
+  @override
+  _TituloPlayState createState() => _TituloPlayState();
+}
+
+class _TituloPlayState extends State<TituloPlay>
+    with SingleTickerProviderStateMixin {
+  bool isPlaying = false;
+  AnimationController playAnimation;
+
+  @override
+  void initState() {
+    this.playAnimation =
+        AnimationController(vsync: this, duration: Duration(milliseconds: 500));
+
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    this.playAnimation.dispose();
+
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -78,10 +102,18 @@ class TituloPlay extends StatelessWidget {
           FloatingActionButton(
               elevation: 0,
               highlightElevation: 0,
-              child: Icon(Icons.play_arrow),
+              child: AnimatedIcon(
+                  icon: AnimatedIcons.play_pause, progress: this.playAnimation),
               backgroundColor: Color(0xffF8CB51),
               onPressed: () {
                 // TODO Botón
+                if (this.isPlaying) {
+                  this.playAnimation.reverse();
+                  this.isPlaying = false;
+                } else {
+                  this.playAnimation.forward();
+                  this.isPlaying = true;
+                }
               })
         ]));
   }
